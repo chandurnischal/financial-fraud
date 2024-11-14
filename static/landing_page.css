@@ -1,0 +1,16 @@
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.btn-custom {
+    margin: 1rem;
+    padding: 1.5rem 3rem;
+    font-size: 2rem;
+    border-radius: 1.5rem;
+}
