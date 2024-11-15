@@ -10,11 +10,7 @@ def index():
 @app.route("/twitter_bots", methods=['GET', 'POST'])
 def twitter_bots():
 
-
-    input_data = request.form["verified"]
-
-    # return render_template("twitter_bots.html", prediction="Human" if prediction == "human" else "Bot")
-    return render_template("twitter_bots.html", prediction=input_data)
+    return render_template("twitter_bots.html", prediction="Human")
 
 
 @app.route("/malicious_url")
