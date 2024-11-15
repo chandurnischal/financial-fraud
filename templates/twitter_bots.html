@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,47 @@
     <link rel="stylesheet" href="static/index.css">
     <link rel="stylesheet" href="static/twitter_bots.css">
 </head>
+
 <body>
-    <h1>Twitter Bots</h1>
-    
-    <form method="post">
-        
-    </form>
+
+    <div class="heading">
+        <h1>Twitter Bots</h1>
+    </div>
+
+    <div class="form-container">
+        <form method="POST" action="/twitter_bots">
+            <label for="verified">Account Verified:</label>
+            <select name="verified" id="verified" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+
+            <label for="geo_enabled">Geo-enabled:</label>
+            <select name="geo_enabled" id="geo_enabled" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+
+            <label for="average_tweets_per_day">Average Tweets per Day:</label>
+            <input type="number" id="average_tweets_per_day" name="average_tweets_per_day" step="0.1" required>
+
+            <label for="account_age_days">Account Age (in days) :</label>
+            <input type="number" id="account_age_days" name="account_age_days" step="1" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div class="result">
+        {% if prediction is not none %}
+        <h1>Result: {{ prediction }}</h1>
+        {% endif %}
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

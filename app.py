@@ -1,7 +1,5 @@
-import numpy as np
-import plotly.graph_objs as go
-import plotly.offline as pyo
-from flask import Flask, render_template
+import pandas as pd
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -9,9 +7,15 @@ app = Flask(__name__)
 def index():
     return render_template("landing_page.html")
 
-@app.route("/twitter_bots")
+@app.route("/twitter_bots", methods=['GET', 'POST'])
 def twitter_bots():
-    return render_template("twitter_bots.html")
+
+
+    input_data = request.form["verified"]
+
+    # return render_template("twitter_bots.html", prediction="Human" if prediction == "human" else "Bot")
+    return render_template("twitter_bots.html", prediction=input_data)
+
 
 @app.route("/malicious_url")
 def malicious_url():
