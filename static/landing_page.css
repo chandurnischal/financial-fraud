@@ -14,3 +14,21 @@
     font-size: 2rem;
     border-radius: 1.5rem;
 }
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 2rem;
+    color: white;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back-button svg {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+}

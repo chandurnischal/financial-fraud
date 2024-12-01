@@ -26,7 +26,8 @@
 
     <div class="result">
         {% if prediction is not none %}
-        <h1>Result: {{ prediction }}</h1>
+        <h1>Result: {{ prediction["prediction"] }}</h1>
+        <h1>Confidence: {{ prediction["confidence"] }}</h1>
         {% endif %}
     </div>
 

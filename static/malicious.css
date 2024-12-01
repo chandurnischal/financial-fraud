@@ -52,7 +52,7 @@ h1 {
 .result {
     justify-content: center;
     align-items: center;
-    display: flex;
+    /* display: flex; */
     height: auto;
     color: white;
     font-size: larger;

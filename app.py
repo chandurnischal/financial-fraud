@@ -36,23 +36,49 @@ def twitter_bots():
     return render_template("twitter_bots.html", prediction=pred)
 
 
+# official
+# @app.route("/malicious_url", methods=["GET", "POST"])
+# def malicious_url():
 
+#     if request.method == "POST":
+#         data = dict(request.form)
+
+#         url = data["url"]
+
+#         try:
+
+#             base = "http://34.204.74.93:8000/predict"            
+#             headers = {
+#                 "Content-Type": "application/json"
+#             }
+
+#             payload = {
+#                     "url": url
+#             }
+
+#             response = requests.post(base, headers=headers, json=payload)
+
+#             if response.status_code == 200:
+#                 pred = response.json()
+
+
+#         except:
+#             pred = "Invalid URL"
+
+#         return render_template("malicious_url.html", prediction=pred)
+
+#     return render_template("malicious_url.html", prediction=None)
+
+# for now
 @app.route("/malicious_url", methods=["GET", "POST"])
 def malicious_url():
 
-    if request.method == "POST":
+    res = dict()
+    res["prediction"] = "malicious"
+    res["confidence"] = 0.98
 
-        data = dict(request.form)
+    return render_template("malicious_url.html", prediction=res)
 
-        url = "https://{}".format(data["url"])
-
-        r = requests.get(url=url)
-
-        pred = r.status_code    
-
-        return render_template("malicious_url.html", prediction=pred)
-
-    return render_template("malicious_url.html", prediction=None)
 
 
 if __name__ == '__main__':
