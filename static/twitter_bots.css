@@ -9,35 +9,42 @@ body {
     overflow-y: auto;
 }
 
+
 h1 {
     color: whitesmoke;
+    padding-bottom: 4rem;
 }
 
-.heading {
-    font-size: larger;
+.container {
+    display: flex;
+    height: 100%;
+    gap: 1rem;
 }
 
-.form-container {
-    width: 40rem;
+.left-card, .right-card {
+    padding: 1rem;
+}
+
+.form-container{
+    border-radius: 1rem;
     padding: 2rem;
     background-color: #ffffff;
-    border-radius: 1rem;
     box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.1);
 }
+
 .form-container label {
     display: block;
     margin: 1.2rem 0 0.6rem;
 }
 .form-container input[type="text"], 
 .form-container input[type="number"] {
-    width: 20rem;
     padding: 1rem;
     margin-bottom: 2rem;
     border: 0.01rem solid #ddd;
     border-radius: 0.04rem;
 }
 .form-container input[type="submit"] {
-    width: 75%;
+    width: 60%;
     height: 5rem;
     border: none;
     border-radius: 0.1rem;
@@ -48,6 +55,18 @@ h1 {
 .form-container input[type="submit"]:hover {
     background-color: #218838;
 }
+
+.result {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: auto;
+    color: white;
+    font-size: larger;
+    padding: 1.5rem;  
+    box-sizing: border-box;
+}
+
 
 .result {
     justify-content: center;
