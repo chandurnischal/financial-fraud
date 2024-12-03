@@ -56,6 +56,8 @@ def malicious_url():
     res = dict()
 
     res["graphs"] = [average_length_of_url(), average_length_of_domain()]
+    res["prediction"] = None
+
 
     if request.method == "POST":
 
@@ -79,6 +81,3 @@ def malicious_url():
 
     return render_template("malicious_url.html", data=res)
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
