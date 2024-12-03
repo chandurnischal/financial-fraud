@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +8,44 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/index.css">
-    <link rel="stylesheet" href="static/malicious.css">
+    <link rel="stylesheet" href="static/routes.css">
 </head>
+
 <body>
+    <h1>Malicious URLs Detection</h1>
 
-    <div class="heading">
-        <h1>Malicious URLs</h1>
+    <div class="container">
+        <div class="left-card">
+            <div class="form-container">
+                <form method="POST" action="/malicious_url">
+                    <label for="url">URL:</label>
+                    <input type="text" id="url" name="url" required>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+
+            <div class="result">
+                {% if data["prediction"] is not none %}
+                <h4>Result: {{ data["prediction"] | safe }}</h4>
+                <h4>Confidence: {{ data["confidence"] | safe }}</h4>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="right-card">
+            <div class="right-card">
+                {% for graph in data["graphs"] %}
+                    <div>
+                        {{ graph | safe }}
+                    </div>
+                {% endfor %}
+     
+            </div>
+        </div>
     </div>
 
-    <div class="form-container">
-        <form method="POST" action="/malicious_url">
-            <label for="url">URL:</label>
-            <input type="text" id="url" name="url" required>
 
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-
-    <div class="result">
-        {% if prediction is not none %}
-        <h1>Result: {{ prediction["prediction"] }}</h1>
-        <h1>Confidence: {{ prediction["confidence"] }}</h1>
-        {% endif %}
-    </div>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

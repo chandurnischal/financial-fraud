@@ -1,6 +1,1 @@
-{
-    "host": "host-name",
-    "password": "pass-word",
-    "port": 1234,
-    "database": "db-name"
-}
+{"host": "host-name", "password": "pass-word", "port": 1234, "database": "db-name"}
