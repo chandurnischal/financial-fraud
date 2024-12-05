@@ -1,1 +1,4 @@
-{"twitter": "", "urls": ""}
+{
+    "twitter": "http://34.239.113.197:5000/twitter_bots", 
+    "urls": "http://54.166.139.239:8000/predict"
+}

@@ -1,1 +1,8 @@
-{"host": "host-name", "password": "pass-word", "port": 1234, "database": "db-name"}
+{
+    "host": "database-1.c3s26ua0q50w.us-east-1.rds.amazonaws.com", 
+    "user": "admin", 
+    "password": "admin123", 
+    "port": 3306, 
+    "database": "datasets"
+}
+

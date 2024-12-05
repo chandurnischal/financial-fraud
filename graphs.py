@@ -1,10 +1,16 @@
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
+from connectDB import retrieveFromDB
+
+
+# twitter = retrieveFromDB("SELECT account_type, verified, average_tweets_per_day FROM twitter_dataset")
+# urls = retrieveFromDB("SELECT type, url_length, domain_length FROM malicious_urls")
 
 twitter = pd.read_csv("data/raw.csv")
 urls = pd.read_csv("data/url.csv")
 
+colors = ["#F9DBBD", "#FCA17D", "#DA627D", "#9A348E"]
 
 def convert_to_graph(fig):
 
@@ -22,8 +28,13 @@ def stacked_bar_chart():
 
     fig = go.Figure()
 
-    for v in grouped.columns:
-        fig.add_trace(go.Bar(x=grouped.index, y=grouped[v], name=v))
+    for i, v in enumerate(grouped.columns):
+        fig.add_trace(go.Bar(
+            x=grouped.index, 
+            y=grouped[v], 
+            name=v, 
+            marker=dict(color=colors[i % 2])
+        ))
 
     fig.update_layout(
         barmode="stack",
@@ -39,15 +50,14 @@ def stacked_bar_chart():
 def boxplot_tweets_per_day():
     fig = go.Figure()
 
-    for type in twitter["account_type"].unique():
+    for i, type in enumerate(twitter["account_type"].unique()):
         fig.add_trace(
             go.Violin(
-                y=twitter.loc[
-                    twitter["account_type"] == type, "average_tweets_per_day"
-                ],
+                y=twitter.loc[twitter["account_type"] == type, "average_tweets_per_day"],
                 name=type,
                 box_visible=True,
                 meanline_visible=True,
+                marker=dict(color=colors[i % 2]),
             )
         )
 
@@ -64,16 +74,18 @@ def boxplot_tweets_per_day():
 def average_length_of_url():
 
     aggregate = urls.groupby("type")["url_length"].median().reset_index()
+    
 
     fig = go.Figure(
         data=[
             go.Bar(
                 x=aggregate["type"],
                 y=aggregate["url_length"],
-                marker=dict(color=["green"] + ["red"] * (len(aggregate) - 1)),
+                marker=dict(color=colors)
             )
         ]
     )
+
 
     fig.update_layout(
         title="Average Length of URLs",
@@ -84,26 +96,20 @@ def average_length_of_url():
 
     return convert_to_graph(fig)
 
-
-def average_length_of_domain():
-
-    aggregate = urls.groupby("type")["domain_length"].median().reset_index()
-
+def pie_chart_urls():
+    aggregate = urls["type"].value_counts().reset_index()
+    
     fig = go.Figure(
         data=[
-            go.Bar(
-                x=aggregate["type"],
-                y=aggregate["domain_length"],
-                marker=dict(color=["green"] + ["red"] * (len(aggregate) - 1)),
+            go.Pie(
+                labels=aggregate["type"],
+                values=aggregate["count"],
+                marker=dict(colors=colors)
             )
         ]
     )
 
-    fig.update_layout(
-        title="Average Length of Domain Name",
-        xaxis_title="Type of Malignity",
-        yaxis_title="Average Length of Domain Name",
-        template="plotly",
-    )
+
+    fig.update_layout(title="Types of URLs")
 
     return convert_to_graph(fig)

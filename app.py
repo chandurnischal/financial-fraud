@@ -3,7 +3,7 @@ from graphs import (
     stacked_bar_chart,
     boxplot_tweets_per_day,
     average_length_of_url,
-    average_length_of_domain,
+    pie_chart_urls,
 )
 import requests
 import json
@@ -45,6 +45,7 @@ def twitter_bots():
 
         except:
             data["prediction"] = "Unable to predict"
+            data["confidence"] = 0.0
 
         return render_template("twitter_bots.html", data=data)
 
@@ -55,7 +56,7 @@ def twitter_bots():
 def malicious_url():
     res = dict()
 
-    res["graphs"] = [average_length_of_url(), average_length_of_domain()]
+    res["graphs"] = [average_length_of_url(), pie_chart_urls()]
     res["prediction"] = None
 
 
@@ -74,10 +75,12 @@ def malicious_url():
             res["confidence"] = response.json()["confidence"]
 
         except:
-            res["prediction"] = "Benign"
-            res["confidence"] = 1.00
+            res["prediction"] = "Unable to predict"
+            res["confidence"] = 0.0
 
         return render_template("malicious_url.html", data=res)
 
     return render_template("malicious_url.html", data=res)
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)

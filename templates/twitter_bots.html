@@ -48,12 +48,14 @@
         </div>
     
         <div class="right-card">
-            {% for graph in data["graphs"] %}
+            <div class="graph-container">
+
+                {% for graph in data["graphs"] %}
                 <div>
                     {{ graph | safe }}
                 </div>
-            {% endfor %}
- 
+                {% endfor %}
+            </div>
         </div>
     </div>
 
